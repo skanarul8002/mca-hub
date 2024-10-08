@@ -8,7 +8,7 @@ Seamlessly track attendance, assess performance, and provide feedback. <br>
 Access records, view marks, and communicate effortlessly.
 </h3>
 <br>
-[LinkedIn](https://www.linkedin.com/in/sheikh-anarul/)
+# About 👉 [in/Sheikh-Anarul](https://www.linkedin.com/in/sheikh-anarul/)
 
 # About
 
