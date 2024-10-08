@@ -9,7 +9,7 @@ Access records, view marks, and communicate effortlessly.
 </h3>
 <br>
 
-👉 [Sk Anarul](https://www.linkedin.com/in/sheikh-anarul/)
+👉 [LinkedIn](https://www.linkedin.com/in/sheikh-anarul/)
 
 # About
 
