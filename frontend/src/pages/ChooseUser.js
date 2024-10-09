@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../redux/userRelated/userHandle';
 import Popup from '../components/Popup';
+import Navbar from '../components/Navbar';
 
 const ChooseUser = ({ visitor }) => {
   const dispatch = useDispatch()
@@ -83,6 +84,8 @@ const ChooseUser = ({ visitor }) => {
   }, [status, currentRole, navigate, currentUser]);
 
   return (
+    <>
+    <Navbar/>
     <StyledContainer>
       <Container>
         <Grid container spacing={2} justifyContent="center">
@@ -136,6 +139,7 @@ const ChooseUser = ({ visitor }) => {
       </Backdrop>
       <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} />
     </StyledContainer>
+    </>
   );
 };
 

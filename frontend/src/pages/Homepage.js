@@ -4,6 +4,7 @@ import { Container, Grid, Box, Button } from '@mui/material';
 import styled, { createGlobalStyle } from 'styled-components';
 import Students from "../assets/stubackimg.svg";
 import './Home.css';
+import Navbar from '../components/Navbar';
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
@@ -12,14 +13,15 @@ const GlobalStyle = createGlobalStyle`
 const Homepage = () => {
     return (
         <>
+            <Navbar/>
             <GlobalStyle />
             <StyledContainer>
                 <Grid container spacing={0}>
                     <Grid item xs={12} md={6}>
                         <StyledPaper>
                             <StyledTitle>
-                                <div className="title">
-                                    <span>Welcome</span>
+                                <div className="title bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent text-7xl ">
+                                    <span >Welcome</span>
                                     to
                                     <span>MCA HUB</span>
                                 </div>
@@ -87,21 +89,21 @@ const StyledBox = styled(Box)`
 
 const StyledTitle = styled.h1`
   font-size: 3rem;
-  color: #333333;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
   padding-top: 0;
   letter-spacing: normal;
   line-height: normal;
   .title span {
+    // font-size: 3rem;
+    // letter-spacing: 2px;
     display: block;
-    color: #333333;
     font-family: 'Roboto', sans-serif;
   }
 `;
 
 const StyledText = styled.p`
-  color: #252525; 
+  color: #0489d3; 
   margin-top: 30px;
   margin-bottom: 30px; 
   letter-spacing: normal;

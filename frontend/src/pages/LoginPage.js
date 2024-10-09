@@ -9,6 +9,7 @@ import { LightPurpleButton } from '../components/buttonStyles';
 import styled from 'styled-components';
 import { loginUser } from '../redux/userRelated/userHandle';
 import Popup from '../components/Popup';
+import Navbar from '../components/Navbar';
 
 const defaultTheme = createTheme();
 
@@ -122,6 +123,9 @@ const LoginPage = ({ role }) => {
     }, [status, currentRole, navigate, error, response, currentUser]);
 
     return (
+        <>
+        <Navbar/>
+        <div className='mt-2 ml-3'>
         <ThemeProvider theme={defaultTheme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
                 <CssBaseline />
@@ -283,6 +287,8 @@ const LoginPage = ({ role }) => {
             </Backdrop>
             <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} />
         </ThemeProvider>
+        </div>
+        </>
     );
 }
 
