@@ -5,7 +5,7 @@ Thank you for checking out this repository! We're excited to have you contribute
 ## Please check the URL on the right side of the project section and browse through all sections. If you find any issues, create a new issue; otherwise, work on the open issues.
 
 **You must star ⭐ the repository first before contributing**
-
+---
 ## How to Contribute
 
 1. **Hacktoberfest Dates:**
@@ -104,3 +104,10 @@ Firstly you can registered as admin with different college name, unique email an
 
 - Render - server side
 - Netlify/Vercel - client side
+
+
+T     H     A     N     K         Y     O     U         T     O         A     L     L
+|     |    / \    |\   |/        \ /   / \   | |        |    / \       / \    |     |
+|     |   /---\   | \  |          |   |   |  | |        |   |   |     /---\   |     |
+|     |  /     \  |  \ |         / \   \ /    |        / \   \ /     /     \  |     |
+
