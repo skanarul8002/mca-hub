@@ -2,6 +2,8 @@
 
 Thank you for checking out this repository! We're excited to have you contribute to Hacktoberfest 2024. Before you get started, please take a moment to read the following rules and guidelines to ensure a smooth contribution process.
 
+##Please check the URL on the right side of the project section and browse through all sections. If you find any issues, create a new issue; otherwise, work on the open issues.
+
 **You must star ⭐ the repository first before contributing**
 
 ## How to Contribute
