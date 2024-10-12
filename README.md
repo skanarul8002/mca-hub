@@ -75,13 +75,27 @@ The MCA-HUB is a web-based application built using the MERN (MongoDB, Express.js
 
 - **Communication:** Users can communicate effortlessly through the system. Professors can send messages to students and vice versa, promoting effective communication and collaboration.
 
-## Technologies Used
+## Login process
+### As student
+![Screenshot_20241012_153127](https://github.com/user-attachments/assets/f0d76587-e157-49c5-acc3-cc2651fd256b)
+### As teacher
+![Screenshot_20241012_153414](https://github.com/user-attachments/assets/99c6fb8a-b4de-4d8c-9543-fcd2fc29df63)
+### As admin
+Firstly you can registered as admin with different college name, unique email and password then you can login
+![Screenshot_20241012_153619](https://github.com/user-attachments/assets/8db0079a-fc8f-455c-bdb6-040eefa7edbb)
+![Screenshot_20241012_153628](https://github.com/user-attachments/assets/1fc319a2-24b9-47c1-836f-6052e9752480)
 
+## Env folder
+### frontend: 
+- REACT_APP_BASE_URL=http://localhost:8081
+### backed :
+- PORT=8081
+- MONGO_URL= use your own local MongoDB url
+## Technologies Used
 - Frontend: React.js, Material UI, Redux
 - Backend: Node.js, Express.js
 - Database: MongoDB Atlas
   <br>
-
 # Deployment
 
 - Render - server side
