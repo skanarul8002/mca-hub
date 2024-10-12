@@ -92,7 +92,7 @@ Firstly you can registered as admin with different college name, unique email an
 - REACT_APP_BASE_URL=http://localhost:8081
 ### backed :
 - PORT=8081
-- MONGO_URL= use your own local MongoDB url
+- MONGO_URL= mongodb+srv://skanarul8093:skanarul8002@projectcluster.4ksacog.mongodb.net/mcaHub?retryWrites=true&w=majority&appName=projectCluster
 ## Technologies Used
 - Frontend: React.js, Material UI, Redux
 - Backend: Node.js, Express.js
