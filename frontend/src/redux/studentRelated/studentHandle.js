@@ -55,3 +55,23 @@ export const removeStuff = (id, address) => async (dispatch) => {
         dispatch(getError(error));
     }
 }
+
+export const updateProfile = (studentId, fields) => async (dispatch) => {
+    dispatch(getRequest());
+
+    try {
+        console.log(fields);
+        console.log(studentId);
+        
+        const result = await axios.put(`${REACT_APP_BASE_URL}/Students/profile/${studentId}`, fields, {
+            headers: { 'Content-Type': 'application/json' },
+        });
+        if (result.data.message) {
+            dispatch(getFailed(result.data.message));
+        } else {
+            dispatch(stuffDone());
+        }
+    } catch (error) {
+        dispatch(getError(error));
+    }
+}
