@@ -1,7 +1,11 @@
-# Welcome to [mca-hacktoberfest24] - Hacktoberfest 2024 🐙🦥🎉
+# Welcome to [MCA_HUB Project-hacktoberfest24] - Hacktoberfest 2024 🐙🦥🎉
 
 Thank you for checking out this repository! We're excited to have you contribute to Hacktoberfest 2024. Before you get started, please take a moment to read the following rules and guidelines to ensure a smooth contribution process.
 
+## Please check the URL on the right side of the project section and browse through all sections. If you find any issues, create a new issue; otherwise, work on the open issues.
+
+**You must star ⭐ the repository first before contributing**
+---
 ## How to Contribute
 
 1. **Hacktoberfest Dates:**
@@ -17,7 +21,7 @@ Thank you for checking out this repository! We're excited to have you contribute
    - Ensure that your PR/MR is either merged, has an overall approving review, or receives the **“hacktoberfest-accepted”** label to count toward your Hacktoberfest progress.
 
 4. **Review Period:**
-   - Once your PR/MR is created and passing checks, it will go through a **seven-day review period**. Make sure your submission remains compliant throughout this time.
+   - Once your PR/MR is created and passing checks, it will go through a **two-day review period**. Make sure your submission remains compliant throughout this time.
    - Even if Hacktoberfest ends on October 31, PR/MRs still in the seven-day review period may continue into November.
 
 5. **Valid Contributions:**
@@ -75,14 +79,35 @@ The MCA-HUB is a web-based application built using the MERN (MongoDB, Express.js
 
 - **Communication:** Users can communicate effortlessly through the system. Professors can send messages to students and vice versa, promoting effective communication and collaboration.
 
-## Technologies Used
+## Login process
+### As student
+![Screenshot_20241012_153127](https://github.com/user-attachments/assets/f0d76587-e157-49c5-acc3-cc2651fd256b)
+### As teacher
+![Screenshot_20241012_153414](https://github.com/user-attachments/assets/99c6fb8a-b4de-4d8c-9543-fcd2fc29df63)
+### As admin
+Firstly you can registered as admin with different college name, unique email and password then you can login
+![Screenshot_20241012_153619](https://github.com/user-attachments/assets/8db0079a-fc8f-455c-bdb6-040eefa7edbb)
+![Screenshot_20241012_153628](https://github.com/user-attachments/assets/1fc319a2-24b9-47c1-836f-6052e9752480)
 
+## Env folder
+### frontend: 
+- REACT_APP_BASE_URL=http://localhost:8081
+### backed :
+- PORT=8081
+- MONGO_URL= mongodb+srv://skanarul8093:skanarul8002@projectcluster.4ksacog.mongodb.net/mcaHub?retryWrites=true&w=majority&appName=projectCluster
+## Technologies Used
 - Frontend: React.js, Material UI, Redux
 - Backend: Node.js, Express.js
 - Database: MongoDB Atlas
   <br>
-
 # Deployment
 
 - Render - server side
 - Netlify/Vercel - client side
+
+
+T     H     A     N     K         Y     O     U         T     O         A     L     L
+|     |    / \    |\   |/        \ /   / \   | |        |    / \       / \    |     |
+|     |   /---\   | \  |          |   |   |  | |        |   |   |     /---\   |     |
+|     |  /     \  |  \ |         / \   \ /    |        / \   \ /     /     \  |     |
+
