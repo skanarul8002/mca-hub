@@ -31,6 +31,7 @@ import {
   getError,
   stuffDone,
 } from "../../redux/studentRelated/studentSlice";
+import { current } from "@reduxjs/toolkit";
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const StudentProfile = () => {
@@ -56,18 +57,26 @@ const StudentProfile = () => {
 
   const sclassName = currentUser.sclassName;
   const studentSchool = currentUser.school;
+
+  const date = new Date(currentUser.dob).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+  // console.log(dob);
   const updateProfile = async () => {
     setLoading(true);
     console.log("Update Profile");
-    const date = new Date(dob).toLocaleDateString();
+    const inputDate = new Date(dob).toLocaleDateString();
 
+  
     try {
       const data = {
         email: email,
         phone: phone,
         address: address,
         emergencyContact: emergencyContact,
-        dob: date.valueOf(),
+        dob: inputDate.valueOf(),
         gender: gender,
       };
 
@@ -161,12 +170,12 @@ const StudentProfile = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" component="p">
-                  <strong>Date of Birth:</strong> {dob.format("DD/MM/YYYY")}
+                  <strong>Date of Birth:</strong> {date}
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" component="p">
-                  <strong>Gender:</strong> Male
+                  <strong>Gender:</strong> {currentUser.gender}
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
