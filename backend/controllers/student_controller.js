@@ -79,6 +79,8 @@ const getStudentDetail = async (req, res) => {
             .populate("sclassName", "sclassName")
             .populate("examResult.subName", "subName")
             .populate("attendance.subName", "subName sessions");
+    console.log(student);
+    
         if (student) {
             student.password = undefined;
             res.send(student);
@@ -271,6 +273,37 @@ const removeStudentAttendance = async (req, res) => {
     }
 };
 
+const updateProfile = async (req, res) => {
+    try {
+        console.log(req.params.id);
+        const id = req.params.id;
+        // const student = await Student.findById(req.params.id);
+        // if (!student) {
+            // return res.send({ message: 'Student not found' });
+        // }
+
+        const data = req.body;
+        console.log(data);  
+        if (data.dob) {
+            data.dob = new Date(data.dob);
+        }
+
+        const updateResult = await Student.findByIdAndUpdate(
+            {_id: id},
+            data,
+            {
+                new: true,
+                runValidators: true
+            }
+        )
+        console.log(updateResult);
+        
+        res.json(updateResult).status(200);    
+
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
 
 module.exports = {
     studentRegister,
@@ -288,4 +321,5 @@ module.exports = {
     clearAllStudentsAttendance,
     removeStudentAttendanceBySubject,
     removeStudentAttendance,
+    updateProfile
 };

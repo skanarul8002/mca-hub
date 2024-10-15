@@ -54,7 +54,28 @@ const studentSchema = new mongoose.Schema({
             ref: 'subject',
             required: true
         }
-    }]
+    }],
+    gender: {
+        type: String
+    },
+    dob: {
+        type: Date
+    },
+    address: {
+        type: String
+    },
+    phone: {
+        type: Number
+    },
+    email: {
+        type: String
+    },
+    photo: {
+        type: String
+    },
+    emergencyContact: {
+        type: Number
+    }
 });
 
 module.exports = mongoose.model("student", studentSchema);
