@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 const Navbar = () => {
   return (
-    <div className='flex justify-between sticky  lg:bg-white top-0 flex-shrink-1 z-10 p-5 pl-4' >
+    <div className='flex justify-between sticky bg-white top-0 flex-shrink-1 z-10 p-5 pl-4' >
         <Link to='/'>
           <h1 className='lg:ml-[100px] bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent sm:ml-[20px] text-xl font-semibold' >
               MCA HUB
