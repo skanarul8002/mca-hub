@@ -25,39 +25,16 @@ import { useDispatch } from "react-redux";
 
 import axios from "axios";
 import {
-  getRequest,
-  getSuccess,
   getFailed,
   getError,
   stuffDone,
 } from "../../redux/studentRelated/studentSlice";
-import { current } from "@reduxjs/toolkit";
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
-
 const StudentProfile = () => {
   const [gender, setGender] = useState("");
-
   const handleChange = (event) => {
     setGender(event.target.value);
   };
-  const [loading, setLoading] = useState(false);
-
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
-
-const StudentProfile = () => {
-  const [gender, setGender] = useState("");
-
-  const handleChange = (event) => {
-    setGender(event.target.value);
-  };
-  const [loading, setLoading] = useState(false);
-
-  const [gender, setGender] = useState('');
-
-  const handleChange = (event) => {
-      setGender(event.target.value);
-  };
-
   const dispatch = useDispatch();
   const { currentUser, response, error } = useSelector((state) => state.user);
   const [email, setEmail] = useState("");
@@ -65,14 +42,7 @@ const StudentProfile = () => {
   const [address, setAddress] = useState("");
   const [emergencyContact, setEmergencyContact] = useState("");
   const [dob, setDob] = useState(dayjs());
-  if (!currentUser) {
-    setEmail(currentUser.email);
-    setPhone(currentUser.phone);
-    setAddress(currentUser.address);
-    setEmergencyContact(currentUser.emergencyContact);
-    setDob(dayjs(currentUser.dob));
-    setGender(currentUser.gender);
-  }
+  const [loading, setLoading] = useState(false);
 
   if (response) {
     console.log(response);
@@ -80,33 +50,18 @@ const StudentProfile = () => {
     console.log(error);
   }
 
-
   const sclassName = currentUser.sclassName;
   const studentSchool = currentUser.school;
 
-  const date = new Date(currentUser.dob).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
+  const date = new Date(currentUser.dob).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   });
-  // console.log(dob);
+
   const updateProfile = async () => {
     setLoading(true);
-    console.log("Update Profile");
     const inputDate = new Date(dob).toLocaleDateString();
-
-  const sclassName = currentUser.sclassName;
-  const studentSchool = currentUser.school;
-  const updateProfile = async () => {
-    setLoading(true);
-    console.log("Update Profile");
-    const date = new Date(dob).toLocaleDateString();
-
-  const sclassName = currentUser.sclassName;
-  const studentSchool = currentUser.school;
-  const updateProfile = async () => {
-    console.log("Update Profile");
-    const date = new Date(dob).toLocaleDateString();
     try {
       const data = {
         email: email,
@@ -116,11 +71,8 @@ const StudentProfile = () => {
         dob: inputDate.valueOf(),
         gender: gender,
       };
-        dob: date.valueOf(),
-        gender: gender,
-      };
-        gender:gender,
-      };
+      console.log(data);
+
       const result = await axios.put(
         `${REACT_APP_BASE_URL}/Student/profile/${currentUser._id}`,
         data,
@@ -128,14 +80,16 @@ const StudentProfile = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-        if (result) {
-  setEmail(result.email || currentUser.email);
-  setPhone(result.phone || currentUser.phone);
-  setAddress(result.address || currentUser.address);
-  setEmergencyContact(result.emergencyContact || currentUser.emergencyContact);
-  setDob(dayjs(result.dob || currentUser.dob));
-  setGender(result.gender || currentUser.gender);
-           }
+      if (result) {
+        setEmail(result.email || currentUser.email);
+        setPhone(result.phone || currentUser.phone);
+        setAddress(result.address || currentUser.address);
+        setEmergencyContact(
+          result.emergencyContact || currentUser.emergencyContact
+        );
+        setDob(dayjs(result.dob || currentUser.dob));
+        setGender(result.gender || currentUser.gender);
+      }
 
       if (result.data.message) {
         dispatch(getFailed(result.data.message));
@@ -211,10 +165,7 @@ const StudentProfile = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" component="p">
-
                   <strong>Date of Birth:</strong> {date}
-
-                  <strong>Date of Birth:</strong> {dob.format("DD/MM/YYYY")}
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -239,7 +190,7 @@ const StudentProfile = () => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" component="p">
-                   <strong>Emergency Contact:</strong>{" "}
+                  <strong>Emergency Contact:</strong>{" "}
                   {currentUser.emergencyContact}
                 </Typography>
               </Grid>
