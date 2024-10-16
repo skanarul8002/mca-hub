@@ -31,6 +31,17 @@ import {
   getError,
   stuffDone,
 } from "../../redux/studentRelated/studentSlice";
+import { current } from "@reduxjs/toolkit";
+const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
+
+const StudentProfile = () => {
+  const [gender, setGender] = useState("");
+
+  const handleChange = (event) => {
+    setGender(event.target.value);
+  };
+  const [loading, setLoading] = useState(false);
+
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const StudentProfile = () => {
@@ -62,12 +73,27 @@ const StudentProfile = () => {
     setDob(dayjs(currentUser.dob));
     setGender(currentUser.gender);
   }
+
   if (response) {
     console.log(response);
   } else if (error) {
     console.log(error);
   }
 
+
+  const sclassName = currentUser.sclassName;
+  const studentSchool = currentUser.school;
+
+  const date = new Date(currentUser.dob).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+  // console.log(dob);
+  const updateProfile = async () => {
+    setLoading(true);
+    console.log("Update Profile");
+    const inputDate = new Date(dob).toLocaleDateString();
 
   const sclassName = currentUser.sclassName;
   const studentSchool = currentUser.school;
@@ -87,6 +113,9 @@ const StudentProfile = () => {
         phone: phone,
         address: address,
         emergencyContact: emergencyContact,
+        dob: inputDate.valueOf(),
+        gender: gender,
+      };
         dob: date.valueOf(),
         gender: gender,
       };
@@ -99,21 +128,15 @@ const StudentProfile = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      if (result) {
-        setEmail(result.email);
-        setPhone(result.phone);
-        setAddress(result.address);
-        setEmergencyContact(result.emergencyContact);
-        setDob(dayjs(result.dob));
-        setGender(result.gender);
-      if(result){
-          setEmail(currentUser.email);
-          setPhone(currentUser.phone);
-          setAddress(currentUser.address);
-          setEmergencyContact(currentUser.emergencyContact);
-          setDob(dayjs(currentUser.dob));
-          setGender(currentUser.gender);
-      }
+        if (result) {
+  setEmail(result.email || currentUser.email);
+  setPhone(result.phone || currentUser.phone);
+  setAddress(result.address || currentUser.address);
+  setEmergencyContact(result.emergencyContact || currentUser.emergencyContact);
+  setDob(dayjs(result.dob || currentUser.dob));
+  setGender(result.gender || currentUser.gender);
+           }
+
       if (result.data.message) {
         dispatch(getFailed(result.data.message));
       } else {
@@ -188,12 +211,15 @@ const StudentProfile = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" component="p">
+
+                  <strong>Date of Birth:</strong> {date}
+
                   <strong>Date of Birth:</strong> {dob.format("DD/MM/YYYY")}
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" component="p">
-                  <strong>Gender:</strong> Male
+                  <strong>Gender:</strong> {currentUser.gender}
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -213,9 +239,8 @@ const StudentProfile = () => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" component="p">
-                  <strong>Emergency Contact:</strong>{" "}
+                   <strong>Emergency Contact:</strong>{" "}
                   {currentUser.emergencyContact}
-                  <strong>Emergency Contact:</strong> {currentUser.emergencyContact}
                 </Typography>
               </Grid>
             </Grid>
@@ -317,63 +342,6 @@ const StudentProfile = () => {
               {/* Button text based on loading state */}
             </Button>
           </form>
-        <Card>
-          <Input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            placeholder="Enter Email"
-          />
-          <br />
-          <Input
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            type="phone"
-            placeholder="Enter Phone"
-          />
-          <br />
-          <Input
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            type="text"
-            placeholder="Enter Address"
-          />
-          <br />
-          <Input
-            value={emergencyContact}
-            onChange={(e) => setEmergencyContact(e.target.value)}
-            type="text"
-            placeholder="Enter Emergency Contact"
-          />
-          <br />
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              value={dob}
-              onChange={(newValue) => setDob(newValue)}
-            />
-          </LocalizationProvider>
-          <br />
-          <div>
-            <h2>Select Your Gender</h2>
-            <select value={gender} onChange={handleChange}>
-                <option value="" disabled>Select gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
-            <div>
-                {gender && <p>You selected: {gender}</p>}
-            </div>
-        </div>
-        <br/>
-          <Button
-            onClick={updateProfile}
-            variant="contained"
-            color="primary"
-            fullWidth
-          >
-            Update Profile
-          </Button>
         </Card>
       </Container>
     </>
