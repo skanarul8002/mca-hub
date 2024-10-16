@@ -22,7 +22,6 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useDispatch } from "react-redux";
-
 import axios from "axios";
 import {
   getRequest,
@@ -31,117 +30,34 @@ import {
   getError,
   stuffDone,
 } from "../../redux/studentRelated/studentSlice";
-import { current } from "@reduxjs/toolkit";
-const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
-
-const StudentProfile = () => {
-  const [gender, setGender] = useState("");
-
-  const handleChange = (event) => {
-    setGender(event.target.value);
-  };
-  const [loading, setLoading] = useState(false);
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const StudentProfile = () => {
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState(""); // Declare gender only once
+  const handleChange = (event) => setGender(event.target.value); // One handleChange function for gender
 
-  const handleChange = (event) => {
-    setGender(event.target.value);
-  };
   const [loading, setLoading] = useState(false);
-
-  const [gender, setGender] = useState('');
-
-  const handleChange = (event) => {
-      setGender(event.target.value);
-  };
-
   const dispatch = useDispatch();
-  const { currentUser, response, error } = useSelector((state) => state.user);
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [emergencyContact, setEmergencyContact] = useState("");
-  const [dob, setDob] = useState(dayjs());
-  if (!currentUser) {
-    setEmail(currentUser.email);
-    setPhone(currentUser.phone);
-    setAddress(currentUser.address);
-    setEmergencyContact(currentUser.emergencyContact);
-    setDob(dayjs(currentUser.dob));
-    setGender(currentUser.gender);
-  }
+  const { currentUser } = useSelector((state) => state.user);
+  const [email, setEmail] = useState(currentUser?.email || "");
+  const [phone, setPhone] = useState(currentUser?.phone || "");
+  const [address, setAddress] = useState(currentUser?.address || "");
+  const [emergencyContact, setEmergencyContact] = useState(currentUser?.emergencyContact || "");
+  const [dob, setDob] = useState(dayjs(currentUser?.dob || dayjs()));
+  const [sclassName, studentSchool] = [currentUser.sclassName, currentUser.school];
 
-  if (response) {
-    console.log(response);
-  } else if (error) {
-    console.log(error);
-  }
-
-
-  const sclassName = currentUser.sclassName;
-  const studentSchool = currentUser.school;
-
-  const date = new Date(currentUser.dob).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  });
-  // console.log(dob);
   const updateProfile = async () => {
     setLoading(true);
-    console.log("Update Profile");
     const inputDate = new Date(dob).toLocaleDateString();
-
-  const sclassName = currentUser.sclassName;
-  const studentSchool = currentUser.school;
-  const updateProfile = async () => {
-    setLoading(true);
-    console.log("Update Profile");
-    const date = new Date(dob).toLocaleDateString();
-
-  const sclassName = currentUser.sclassName;
-  const studentSchool = currentUser.school;
-  const updateProfile = async () => {
-    console.log("Update Profile");
-    const date = new Date(dob).toLocaleDateString();
     try {
-      const data = {
-        email: email,
-        phone: phone,
-        address: address,
-        emergencyContact: emergencyContact,
-        dob: inputDate.valueOf(),
-        gender: gender,
-      };
-        dob: date.valueOf(),
-        gender: gender,
-      };
-        gender:gender,
-      };
+      const data = { email, phone, address, emergencyContact, dob: inputDate, gender };
       const result = await axios.put(
         `${REACT_APP_BASE_URL}/Student/profile/${currentUser._id}`,
         data,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
+        { headers: { "Content-Type": "application/json" } }
       );
-        if (result) {
-  setEmail(result.email || currentUser.email);
-  setPhone(result.phone || currentUser.phone);
-  setAddress(result.address || currentUser.address);
-  setEmergencyContact(result.emergencyContact || currentUser.emergencyContact);
-  setDob(dayjs(result.dob || currentUser.dob));
-  setGender(result.gender || currentUser.gender);
-           }
-
-      if (result.data.message) {
-        dispatch(getFailed(result.data.message));
-      } else {
-        dispatch(stuffDone());
-      }
+      // Handle update logic here
     } catch (error) {
       dispatch(getError(error));
     } finally {
@@ -150,207 +66,162 @@ const StudentProfile = () => {
   };
 
   return (
-    <>
-      <Container maxWidth="md">
-        <StyledPaper elevation={3}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Box display="flex" justifyContent="center">
-                <Avatar alt="Student Avatar" sx={{ width: 150, height: 150 }}>
-                  {String(currentUser.name).charAt(0)}
-                </Avatar>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box display="flex" justifyContent="center">
-                <Typography variant="h5" component="h2" textAlign="center">
-                  {currentUser.name}
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box display="flex" justifyContent="center">
-                <Typography
-                  variant="subtitle1"
-                  component="p"
-                  textAlign="center"
-                >
-                  Student Sch.Id: {currentUser.rollNum}
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box display="flex" justifyContent="center">
-                <Typography
-                  variant="subtitle1"
-                  component="p"
-                  textAlign="center"
-                >
-                  Course: {sclassName.sclassName}
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box display="flex" justifyContent="center">
-                <Typography
-                  variant="subtitle1"
-                  component="p"
-                  textAlign="center"
-                >
-                  College: {studentSchool.schoolName}
-                </Typography>
-              </Box>
-            </Grid>
+    <Container maxWidth="md">
+      {/* Main Profile Section */}
+      <StyledPaper elevation={3}>
+        <Grid container spacing={3}>
+          {/* Student Avatar */}
+          <Grid item xs={12}>
+            <Box display="flex" justifyContent="center" marginBottom={2}>
+              <Avatar alt="Student Avatar" sx={{ width: 150, height: 150 }}>
+                {String(currentUser?.name || "").charAt(0)}
+              </Avatar>
+            </Box>
           </Grid>
-        </StyledPaper>
-        <Card>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Personal Information:
-            </Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1" component="p">
 
-                  <strong>Date of Birth:</strong> {date}
+          {/* Student Name Card */}
+          <Grid item xs={12} sm={4}>
+            <CardStyled>
+              <CardContent>
+                <Typography variant="h6" component="h2" gutterBottom>
+                  Name
+                </Typography>
+                <Typography variant="body2">{currentUser?.name}</Typography>
+              </CardContent>
+            </CardStyled>
+          </Grid>
 
-                  <strong>Date of Birth:</strong> {dob.format("DD/MM/YYYY")}
+          {/* Student Email Card */}
+          <Grid item xs={12} sm={4}>
+            <CardStyled>
+              <CardContent>
+                <Typography variant="h6" component="h2" gutterBottom>
+                  Email
                 </Typography>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1" component="p">
-                  <strong>Gender:</strong> {currentUser.gender}
+                <Typography variant="body2">{currentUser?.email}</Typography>
+              </CardContent>
+            </CardStyled>
+          </Grid>
+
+          {/* Student College Card */}
+          <Grid item xs={12} sm={4}>
+            <CardStyled>
+              <CardContent>
+                <Typography variant="h6" component="h2" gutterBottom>
+                  College
                 </Typography>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1" component="p">
-                  <strong>Email:</strong> {currentUser.email}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1" component="p">
-                  <strong>Phone:</strong> {currentUser.phone}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1" component="p">
-                  <strong>Address:</strong> {currentUser.address}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Typography variant="subtitle1" component="p">
-                   <strong>Emergency Contact:</strong>{" "}
-                  {currentUser.emergencyContact}
-                </Typography>
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
-        <Card
-          style={{ padding: "20px", maxWidth: "600px", margin: "20px auto" }}
-        >
-          <form noValidate autoComplete="off">
-            {/* Email Input */}
-            <FormControl fullWidth margin="normal">
-              <InputLabel>Email</InputLabel>
-              <Input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                placeholder="Enter Email"
+                <Typography variant="body2">{studentSchool?.schoolName}</Typography>
+              </CardContent>
+            </CardStyled>
+          </Grid>
+        </Grid>
+      </StyledPaper>
+
+      {/* Form Section */}
+      <Card style={{ padding: "20px", maxWidth: "600px", margin: "20px auto" }}>
+        <form noValidate autoComplete="off">
+          {/* Email Input */}
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Email1</InputLabel>
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              placeholder="Enter Email"
+            />
+          </FormControl>
+
+          {/* Phone Input */}
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Phone</InputLabel>
+            <Input
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              type="tel"
+              placeholder="Enter Phone"
+            />
+          </FormControl>
+
+          {/* Address Input */}
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Address</InputLabel>
+            <Input
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              type="text"
+              placeholder="Enter Address"
+            />
+          </FormControl>
+
+          {/* Emergency Contact Input */}
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Emergency Contact</InputLabel>
+            <Input
+              value={emergencyContact}
+              onChange={(e) => setEmergencyContact(e.target.value)}
+              type="text"
+              placeholder="Enter Emergency Contact"
+            />
+          </FormControl>
+
+          {/* Date of Birth Picker */}
+          <FormControl fullWidth margin="normal">
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Date of Birth"
+                value={dob}
+                onChange={(newValue) => setDob(newValue)}
+                renderInput={(params) => <TextField {...params} />}
               />
-            </FormControl>
+            </LocalizationProvider>
+          </FormControl>
 
-            {/* Phone Input */}
-            <FormControl fullWidth margin="normal">
-              <InputLabel>Phone</InputLabel>
-              <Input
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                type="tel"
-                placeholder="Enter Phone"
-              />
-            </FormControl>
-
-            {/* Address Input */}
-            <FormControl fullWidth margin="normal">
-              <InputLabel>Address</InputLabel>
-              <Input
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                type="text"
-                placeholder="Enter Address"
-              />
-            </FormControl>
-
-            {/* Emergency Contact Input */}
-            <FormControl fullWidth margin="normal">
-              <InputLabel>Emergency Contact</InputLabel>
-              <Input
-                value={emergencyContact}
-                onChange={(e) => setEmergencyContact(e.target.value)}
-                type="text"
-                placeholder="Enter Emergency Contact"
-              />
-            </FormControl>
-
-            {/* Date of Birth Picker */}
-            <FormControl fullWidth margin="normal">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  label="Date of Birth"
-                  value={dob}
-                  onChange={(newValue) => setDob(newValue)}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
-            </FormControl>
-
-            {/* Gender Selection */}
-            <FormControl fullWidth margin="normal" variant="outlined">
-              <InputLabel id="gender-label">Select Gender</InputLabel>
-              <Select
-                labelId="gender-label"
-                id="gender-select"
-                value={gender}
-                onChange={handleChange}
-                label="Select Gender" // This ensures the label floats above the dropdown
-              >
-                <MenuItem value="" disabled>
-                  Select gender
-                </MenuItem>
-                <MenuItem value="Male">Male</MenuItem>
-                <MenuItem value="Female">Female</MenuItem>
-                <MenuItem value="Other">Other</MenuItem>
-              </Select>
-            </FormControl>
-
-            {gender && (
-              <p style={{ marginTop: "10px" }}>You selected: {gender}</p>
-            )}
-
-            {/* Update Profile Button */}
-            <Button
-              onClick={updateProfile}
-              variant="contained"
-              color="primary"
-              fullWidth
-              style={{ marginTop: "20px" }}
-              disabled={loading} // Disable button during async call
+          {/* Gender Selection */}
+          <FormControl fullWidth margin="normal" variant="outlined">
+            <InputLabel id="gender-label">Select Gender</InputLabel>
+            <Select
+              labelId="gender-label"
+              id="gender-select"
+              value={gender}
+              onChange={handleChange}
+              label="Select Gender"
             >
-              {loading ? "Updating..." : "Update Profile"}{" "}
-              {/* Button text based on loading state */}
-            </Button>
-          </form>
-        </Card>
-      </Container>
-    </>
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
+            </Select>
+          </FormControl>
+
+          {/* Update Button */}
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={updateProfile}
+            disabled={loading}
+          >
+            {loading ? "Updating..." : "Update Profile"}
+          </Button>
+        </form>
+      </Card>
+    </Container>
   );
 };
 
 export default StudentProfile;
 
+// Styled components for card and paper
 const StyledPaper = styled(Paper)`
   padding: 20px;
   margin-bottom: 20px;
 `;
+
+const CardStyled = styled(Card)`
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: 0.3s;
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+`;
+
