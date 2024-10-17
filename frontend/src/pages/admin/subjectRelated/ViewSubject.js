@@ -13,6 +13,7 @@ import InsertChartIcon from '@mui/icons-material/InsertChart';
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
+import CustomLoading from '../../../components/CustomLoading';
 
 const ViewSubject = () => {
   const navigate = useNavigate()
@@ -181,7 +182,7 @@ const ViewSubject = () => {
   return (
     <>
       {subloading ?
-        < div > Loading...</div >
+        <CustomLoading />
         :
         <>
           <Box sx={{ width: '100%', typography: 'body1', }} >

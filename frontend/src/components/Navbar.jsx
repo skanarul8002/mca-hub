@@ -6,7 +6,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(false);
   };
   return (
     <div className="flex justify-between sticky bg-white top-0 flex-shrink-1 z-10 p-5 pl-4">
