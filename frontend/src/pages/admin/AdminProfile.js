@@ -11,6 +11,9 @@ const AdminProfile = () => {
 
     return (
         <div style={{ padding: '20px' }}>
+
+      {/*git remote add upstream <upstream_repo_url>*/}
+
             <Avatar
                 alt={currentUser.name}
                 src="/path/to/profile.jpg"

@@ -208,7 +208,7 @@ const StudentProfile = () => {
   );
 };
 
-export default StudentProfile;
+export default StudentProfile
 
 // Styled components for card and paper
 const StyledPaper = styled(Paper)`
