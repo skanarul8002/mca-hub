@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 const Student = require('../models/studentSchema.js');
 const Subject = require('../models/subjectSchema.js');
-
+const jwt=require('jsonwebtoken')
+const nodemailer=require('nodemailer')
 const studentRegister = async (req, res) => {
     try {
         const salt = await bcrypt.genSalt(10);
@@ -305,6 +306,75 @@ const updateProfile = async (req, res) => {
     }
 };
 
+const studentResetPasswordLink=async(req,res)=>{
+    try {
+        const user=await Student.findOne({email:req.body.email})
+
+        if(!user){
+            res.status(400).json({message:"User with this email does not exist"})
+        }
+
+        const secret=process.env.JWT_SECRET+user.password
+
+        const token=await jwt.sign({
+            email:user.email,
+            id:user._id
+        },
+        secret,
+        {
+            expiresIn:process.env.JWT_EXPIRY
+        })
+
+        const url=`${process.env.BACKEND_URL}/Student/resetpassword/${user._id}/${token}`
+        const transporter=nodemailer.createTransport({
+            host:'smtp.gmail.com',
+            port:587,
+            auth:{
+                user:process.env.EMAIL,
+                pass:process.env.PASSWORD
+            }
+        })
+        await transporter.sendMail({
+            to:user.email,
+            subject:'Password Reset Link',
+            text:`Click on the link below to reset your password
+            ${url}`
+        })
+
+        res.status(200).json({message:"Password reset link has been sent to your email"})
+    } catch (error) {
+        res.status(500).json({message:"Something went wrong"})
+    }
+}
+
+const studentResetPassword=async(req,res)=>{
+    try {
+        const user=await Student.findById(req.params.id)
+
+        if(!user){
+            res.status(400).json({message:"User does not exist"})
+        }
+
+        const secret=process.env.JWT_SECRET+user.password
+
+        const decoded=await jwt.verify(req.params.token,secret)
+
+        if(decoded.id===user._id.toString()){
+            user.password=req.body.password
+            const salt=await bcrypt.genSalt(10)
+            user.password=await bcrypt.hash(user.password,salt)
+
+            await user.save()
+            res.status(200).json({message:"Password reset successful"})
+        }
+        else{
+            res.status(400).json({message:"Invalid token"})
+        }
+    } catch (error) {
+        res.status(500).json({message:"Something went wrong"})
+    }
+}
+
 module.exports = {
     studentRegister,
     studentLogIn,
@@ -321,5 +391,8 @@ module.exports = {
     clearAllStudentsAttendance,
     removeStudentAttendanceBySubject,
     removeStudentAttendance,
-    updateProfile
+    updateProfile,
+
+    studentResetPasswordLink,
+    studentResetPassword
 };
