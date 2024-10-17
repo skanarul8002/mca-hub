@@ -3,6 +3,7 @@ import { getTeacherDetails } from '../../../redux/teacherRelated/teacherHandle';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Container, Typography } from '@mui/material';
+import CustomLoading from '../../../components/CustomLoading';
 
 const TeacherDetails = () => {
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ const TeacherDetails = () => {
     return (
         <>
             {loading ? (
-                <div>Loading...</div>
+                <CustomLoading />
             ) : (
                 <Container>
                     <Typography variant="h4" align="center" gutterBottom>

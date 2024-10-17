@@ -18,6 +18,7 @@ import SpeedDialTemplate from "../../../components/SpeedDialTemplate";
 import Popup from "../../../components/Popup";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PostAddIcon from '@mui/icons-material/PostAdd';
+import CustomLoading from "../../../components/CustomLoading";
 
 const ClassDetails = () => {
     const params = useParams()
@@ -252,7 +253,7 @@ const ClassDetails = () => {
     return (
         <>
             {loading ? (
-                <div>Loading...</div>
+                <CustomLoading />
             ) : (
                 <>
                     <Box sx={{ width: '100%', typography: 'body1', }} >

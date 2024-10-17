@@ -12,6 +12,7 @@ import TableTemplate from '../../../components/TableTemplate';
 import { BlueButton, GreenButton } from '../../../components/buttonStyles';
 import SpeedDialTemplate from '../../../components/SpeedDialTemplate';
 import Popup from '../../../components/Popup';
+import CustomLoading from '../../../components/CustomLoading';
 
 const ShowSubjects = () => {
     const navigate = useNavigate()
@@ -86,7 +87,7 @@ const ShowSubjects = () => {
     return (
         <>
             {loading ?
-                <div>Loading...</div>
+                <CustomLoading />
                 :
                 <>
                     {response ?

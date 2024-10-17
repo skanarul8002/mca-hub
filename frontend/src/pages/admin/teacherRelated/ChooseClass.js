@@ -5,6 +5,7 @@ import { getAllSclasses } from '../../../redux/sclassRelated/sclassHandle';
 import { useNavigate } from 'react-router-dom';
 import { PurpleButton } from '../../../components/buttonStyles';
 import TableTemplate from '../../../components/TableTemplate';
+import CustomLoading from '../../../components/CustomLoading';
 
 const ChooseClass = ({ situation }) => {
     const navigate = useNavigate()
@@ -55,7 +56,7 @@ const ChooseClass = ({ situation }) => {
     return (
         <>
             {loading ?
-                <div>Loading...</div>
+                <CustomLoading />
                 :
                 <>
                     {getresponse ?
