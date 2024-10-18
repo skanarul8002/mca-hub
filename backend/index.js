@@ -13,6 +13,7 @@ const PORT = process.env.PORT
 // app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 
 app.use(express.json({ limit: '10mb' }))
+app.use(express.urlencoded({  extended: true }))
 app.use(cors())
 
 mongoose
