@@ -12,7 +12,7 @@ export default function StudentProfileCard({ currentUser }) {
     emergencyNumber: "+088 01234567890",
   };
   return (
-    <div className="mx-auto w-[90%] md:w-4/5 mt-12 border-2 p-8 shadow-md">
+    <div className="mx-auto w-[90%] md:w-4/5 lg:w-3/5 mt-12 border-2 p-8 shadow-md">
       <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
           <img
