@@ -5,6 +5,7 @@ import {
 } from '@mui/material';
 import { getAllComplains } from '../../../redux/complainRelated/complainHandle';
 import TableTemplate from '../../../components/TableTemplate';
+import CustomLoading from '../../../components/CustomLoading';
 
 const SeeComplains = () => {
 
@@ -48,7 +49,7 @@ const SeeComplains = () => {
   return (
     <>
       {loading ?
-        <div>Loading...</div>
+        <CustomLoading />
         :
         <>
           {response ?

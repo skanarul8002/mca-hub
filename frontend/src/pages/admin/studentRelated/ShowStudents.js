@@ -25,6 +25,7 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Popup from "../../../components/Popup";
+import CustomLoading from "../../../components/CustomLoading";
 
 const ShowStudents = () => {
   const navigate = useNavigate();
@@ -202,18 +203,7 @@ const ShowStudents = () => {
   return (
     <>
       {loading ? (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "100vh",
-            textAlign: "center",
-            fontSize: "calc(10px + 1.5vw)",
-          }}
-        >
-          Loading...
-        </div>
+        <CustomLoading />
       ) : (
         <>
           {response ? (
