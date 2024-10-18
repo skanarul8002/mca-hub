@@ -19,6 +19,7 @@ import {
 import { BlackButton, BlueButton } from "../../components/buttonStyles";
 import TableTemplate from "../../components/TableTemplate";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import CustomLoading from "../../components/CustomLoading";
 
 const TeacherClassDetails = () => {
   const navigate = useNavigate();
@@ -163,18 +164,7 @@ const TeacherClassDetails = () => {
   return (
     <>
       {loading ? (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "100vh",
-            textAlign: "center",
-            fontSize: "calc(10px + 1.5vw)",
-          }}
-        >
-          Loading...
-        </div>
+        <CustomLoading />
       ) : (
         <>
           <div
