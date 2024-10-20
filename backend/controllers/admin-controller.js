@@ -188,6 +188,7 @@ const adminResetPasswordLink=async(req,res)=>{
 
         res.status(200).json({message:"Password reset link has been sent to your email"})
     } catch (error) {
+        console.log(error);
         res.status(500).json({message:"Something went wrong"})
     }
 }
