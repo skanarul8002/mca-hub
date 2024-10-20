@@ -212,7 +212,7 @@ const teacherResetPasswordLink=async(req,res)=>{
             expiresIn:process.env.JWT_EXPIRY
         })
 
-        const url=`${process.env.BACKEND_URL}/Teacher/resetpassword/${user._id}/${token}`
+        const url=`${process.env.FRONTEND_URL}/Teacher/resetpassword/${user._id}/${token}`
         const transporter=nodemailer.createTransport({
             host:'smtp.gmail.com',
             port:587,
@@ -225,7 +225,9 @@ const teacherResetPasswordLink=async(req,res)=>{
             to:user.email,
             subject:'Password Reset Link',
             text:`Click on the link below to reset your password
-            ${url}`
+            ${url}`,
+            html:`<h2>Click on the link below to reset your password</h2>
+            <a href=${url}>Password Reset</a>`
         })
         res.status(200).json({message:"Password reset link has been sent to your email"})
     } catch (error) {

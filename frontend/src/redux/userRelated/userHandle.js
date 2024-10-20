@@ -32,6 +32,39 @@ export const loginUser = (fields, role) => async (dispatch) => {
     }
 };
 
+export const resetPasswordLink=(role,email)=>async(dispatch)=>{
+    dispatch(authRequest());
+    try {
+        const result = await axios.post(`${REACT_APP_BASE_URL}/${role}/resetPasswordLink`, { email }, {
+            headers: { 'Content-Type': 'application/json' },
+        });
+        if (result.data.message) {
+            dispatch(authFailed(result.data.message));
+        } else {
+            dispatch(authSuccess(result.data));
+        }
+    } catch (error) {
+        dispatch(authError(error));
+    }
+}
+
+export const resetPassword=(role,password,id,token)=>async(dispatch)=>{
+    dispatch(authRequest());
+    try {
+        const result = await axios.post(`${REACT_APP_BASE_URL}/${role}/resetpassword/${id}/${token}`, { password }, {
+            headers: { 'Content-Type': 'application/json' },
+        });
+        if (result.data.message) {
+            dispatch(authFailed(result.data.message));
+        } else {
+            dispatch(authSuccess(result.data));
+        }
+    } catch (error) {
+        dispatch(authError(error));
+    }
+}
+
+
 export const registerUser = (fields, role) => async (dispatch) => {
     dispatch(authRequest());
 
