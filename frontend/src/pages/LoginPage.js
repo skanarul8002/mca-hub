@@ -31,6 +31,7 @@ const LoginPage = ({ role }) => {
     const [rollNumberError, setRollNumberError] = useState(false);
     const [studentNameError, setStudentNameError] = useState(false);
 
+    let path = role === "Admin" ? "/Admin/forgetpassword" : role === "Student" ? "/Student/forgetpassword" : "/Teacher/forgetpassword"
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -226,7 +227,7 @@ const LoginPage = ({ role }) => {
                                     control={<Checkbox value="remember" color="primary" />}
                                     label="Remember me"
                                 />
-                                <StyledLink href="#">
+                                <StyledLink to={path}>
                                     Forgot password?
                                 </StyledLink>
                             </Grid>

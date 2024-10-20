@@ -338,7 +338,9 @@ const studentResetPasswordLink=async(req,res)=>{
             to:user.email,
             subject:'Password Reset Link',
             text:`Click on the link below to reset your password
-            ${url}`
+            ${url}`,
+            html:`<h2>Click on the link below to reset your password</h2>
+            <a href=${url}>Password Reset</a>`
         })
 
         res.status(200).json({message:"Password reset link has been sent to your email"})
