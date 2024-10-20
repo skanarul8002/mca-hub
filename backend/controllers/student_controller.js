@@ -325,7 +325,7 @@ const studentResetPasswordLink=async(req,res)=>{
             expiresIn:process.env.JWT_EXPIRY
         })
 
-        const url=`${process.env.BACKEND_URL}/Student/resetpassword/${user._id}/${token}`
+        const url=`${process.env.FRONTEND_URL}/Student/resetpassword/${user._id}/${token}`
         const transporter=nodemailer.createTransport({
             host:'smtp.gmail.com',
             port:587,
