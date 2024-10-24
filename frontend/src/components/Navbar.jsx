@@ -43,18 +43,18 @@ const Navbar = () => {
           }`}
         >
           <ul className="flex flex-col items-start space-y-4 p-4 font-medium text-blue-600">
-            <Link href="/" onClick={toggleDropdown}>
+            <Link to="/" onClick={toggleDropdown}>
               <li className="hover:brightness-50 hover:cursor-pointer">Home</li>
             </Link>
-            <Link href="/choose" onClick={toggleDropdown}>
+            <Link to="/choose" onClick={toggleDropdown}>
               <li className="hover:brightness-50 hover:cursor-pointer">
                 Login
               </li>
             </Link>
-            <Link href="/Adminregister" onClick={toggleDropdown}>
+            <Link to="/Adminregister" onClick={toggleDropdown}>
               <li className="hover:brightness-50">Register</li>
             </Link>
-            <Link href="/chooseasguest" onClick={toggleDropdown}>
+            <Link to="/chooseasguest" onClick={toggleDropdown}>
               <li className="hover:brightness-50">Login as Guest</li>
             </Link>
           </ul>
@@ -62,18 +62,16 @@ const Navbar = () => {
         {/*Larger Screen Sizes*/}
         <div className="hidden md:flex md:items-center md:w-auto w-full">
           <ul className="flex space-x-6 lg:mr-[100px] md:mr-[50px] mr-[5px] font-medium text-blue-600">
-            <Link href="/">
+            <Link to="/">
               <li className="hover:brightness-50 hover:cursor-pointer">Home</li>
             </Link>
-            <Link href="/choose">
-              <li className="hover:brightness-50 hover:cursor-pointer">
-                Login
-              </li>
+            <Link to="/choose">
+              <li className="hover:brightness-50 hover:cursor-pointer">Login</li>
             </Link>
-            <Link href="/Adminregister">
+            <Link to="/Adminregister">
               <li className="hover:brightness-50">Register</li>
             </Link>
-            <Link href="/chooseasguest">
+            <Link to="/chooseasguest">
               <li className="hover:brightness-50">Login as Guest</li>
             </Link>
           </ul>
