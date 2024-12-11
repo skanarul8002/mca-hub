@@ -6,7 +6,7 @@ import {
   HarmCategory,
 } from '@google/generative-ai'; // Make sure this package is installed
 
-const API_KEY = "AIzaSyDfWKOKfr2D8A9VmZe__NlDu4S3WC8fkv8"; // Replace with your actual API key
+const API_KEY = process.env.REACT_APP_API_KEY; // Replace with your actual API key
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 const ChatContent = () => {
