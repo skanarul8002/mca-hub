@@ -10,10 +10,12 @@ import AdminRegisterPage from './pages/admin/AdminRegisterPage';
 import ChooseUser from './pages/ChooseUser';
 import ForgetPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import Chatbot from './components/Chatbot/Chatbot';
 const App = () => {
   const { currentRole } = useSelector(state => state.user);
 
   return (
+    <>
     <Router>
       {currentRole === null &&
         <Routes>
@@ -53,6 +55,8 @@ const App = () => {
         </>
       }
     </Router>
+    <Chatbot/>
+    </>
   )
 }
 

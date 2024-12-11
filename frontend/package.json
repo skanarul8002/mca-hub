@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@google/generative-ai": "^0.21.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.131",
     "@mui/material": "^5.16.7",
@@ -15,6 +16,7 @@
     "dotenv": "^16.4.5",
     "eslint-config-react-app": "^7.0.1",
     "frontend": "file:",
+    "marked": "^15.0.3",
     "react": "^18.2.0",
     "react-countup": "^6.4.2",
     "react-dom": "^18.2.0",
