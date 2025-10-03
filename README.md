@@ -1,4 +1,4 @@
-# Welcome to [MCA_HUB Project-hacktoberfest24] - Hacktoberfest 2024 🐙🦥🎉
+# Welcome to [MCA_HUB Project-hacktoberfest25] - Hacktoberfest 2025 🐙🦥🎉
 
 Thank you for checking out this repository! We're excited to have you contribute to Hacktoberfest 2024. Before you get started, please take a moment to read the following rules and guidelines to ensure a smooth contribution process.
 
